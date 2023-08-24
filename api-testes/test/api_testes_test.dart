@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() {
   test("Deve efetuar o calculo IMC", (){
     // Triple A pattern
-    
+
     // arrange -> Prreparação para executar os testes (Ex: criação de variáveis)
     final peso = 64.0;
     final altura = 1.78;
@@ -17,6 +17,10 @@ void main() {
 
     // assert -> Resultado esperado após Act (Ação)
     expect(result, equals(20.199469763918696));
+    expect(result, isA<double>());
+    expect(result, greaterThan(20));
+    expect(result, isPositive);
+    expect(result.toString(), matches(RegExp(r'\d')));
 
   });
 
