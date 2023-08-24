@@ -6,7 +6,16 @@ import 'package:test/test.dart';
 // Apenas uma questão de organização
 void main() {
   test("Deve efetuar o calculo IMC", (){
-    final result = calcIMC(1.78, 64);
+    // Triple A pattern
+    
+    // arrange -> Prreparação para executar os testes (Ex: criação de variáveis)
+    final peso = 64.0;
+    final altura = 1.78;
+
+    // act -> Executando os testes
+    final result = calcIMC(altura, peso);
+
+    // assert -> Resultado esperado após Act (Ação)
     expect(result, equals(20.199469763918696));
 
   });
