@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,9 +33,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter()async  {
-    await Future.delayed(const Duration(seconds: 2));
+  bool loading = false;
+
+  void _incrementCounter() async {
     setState(() {
+      loading = true;
+    });
+    await Future.delayed(Duration(seconds: Random().nextInt(10)));
+    setState(() {
+      loading = false;
       _counter++;
     });
   }
@@ -51,11 +59,16 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              key: const Key("CounterValue"),
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            if (loading)
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
+            if (!loading)
+              Text(
+                key: const Key("CounterValue"),
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
           ],
         ),
       ),

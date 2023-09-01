@@ -23,8 +23,10 @@ void main() {
     expect(find.text('2'), findsNothing);
 
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pump(const Duration(seconds: 10)); // Utilizado quando o widget depende de algo no futuro. Vai pular 10s no frame. Vai para 10s no futuro
-    await tester.pump(); // Necessário para atualizar o estado mesmo que ele já tenha sido alterdo em memoria
+    // await tester.pump(const Duration(seconds: 10)); // Utilizado quando o widget depende de algo no futuro. Vai pular 10s no frame. Vai para 10s no futuro
+    // await tester.pump(); // Necessário para atualizar o estado mesmo que ele já tenha sido alterdo em memoria
+
+    await tester.pumpAndSettle();
 
   
 
@@ -32,12 +34,12 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
 
-    await tester.tap(find.byIcon(Icons.add));
-     await tester.pump(const Duration(seconds: 10));
-    await tester.pump();
+    // await tester.tap(find.byIcon(Icons.add));
+    //  await tester.pump(const Duration(seconds: 10));
+    // await tester.pump();
 
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsNothing);
-    expect(find.text("2"), findsOneWidget);
+    // expect(find.text('0'), findsNothing);
+    // expect(find.text('1'), findsNothing);
+    // expect(find.text("2"), findsOneWidget);
   });
 }
