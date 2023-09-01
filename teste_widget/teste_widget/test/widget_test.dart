@@ -15,24 +15,25 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp()); // infla o widget a ser testado
 
+    expect(find.byKey(const Key("CounterValue")), findsOneWidget);
+
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
     expect(find.text('2'), findsNothing);
 
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump(const Duration(seconds: 10)); // Utilizado quando o widget depende de algo no futuro. Vai pular 10s no frame. Vai para 10s no futuro
+    await tester.pump(); // Necessário para atualizar o estado mesmo que ele já tenha sido alterdo em memoria
 
-    expect(find.byKey(const Key("CounterValue")), findsOneWidget);
+  
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add)); // match para clicar no botão
-    await tester
-        .pump(); // Necessário para atualizar o estado mesmo que ele já tenha sido alterdo em memoria
-
-    // Verify that our counter has incremented.
+    // // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.add));
+     await tester.pump(const Duration(seconds: 10));
     await tester.pump();
 
     expect(find.text('0'), findsNothing);
