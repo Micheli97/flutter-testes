@@ -20,6 +20,9 @@ void main() {
     expect(find.text('1'), findsNothing);
     expect(find.text('2'), findsNothing);
 
+
+    expect(find.byKey(const Key("CounterValue")), findsOneWidget);
+
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add)); // match para clicar no botão
     await tester
